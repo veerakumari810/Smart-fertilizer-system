@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Fertilizer Recommendation</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Main Fertilizer Form -->
+    <div class="container">
+        <h1>🌱 Smart Fertilizer Recommendation</h1>
+        <p>Enter your soil details below to get the recommended fertilizer.</p>
+
+        <form id="fertilizerForm" action="/predict" method="post">
+            <label for="N">Nitrogen (N):</label>
+            <input type="number" name="N" step="any" required>
+
+            <label for="P">Phosphorus (P):</label>
+            <input type="number" name="P" step="any" required>
+
+            <label for="K">Potassium (K):</label>
+            <input type="number" name="K" step="any" required>
+
+            <label for="pH">Soil pH:</label>
+            <input type="number" name="pH" step="any" required>
+
+            <label for="Moisture">Moisture (%):</label>
+            <input type="number" name="Moisture" step="any" required>
+
+            <input type="submit" value="Predict Fertilizer">
+        </form>
+
+        <!-- Prediction result -->
+        {% if prediction_text %}
+        <div class="result">
+            <h2>✅ Recommendation:</h2>
+            <p>{{ prediction_text }}</p>
+        </div>
+        {% endif %}
+    </div>
+<!-- CHATBOT PANEL -->
+<div class="chatbot">
+    <div class="chatbot-header">🌾 Fertilizer Chatbot</div>
+    <div class="chatbot-messages" id="chatMessages">
+        <div class="bot">Hello! Ask fertilizer quantity for your crop 🌱</div>
+    </div>
+    <div class="chatbot-input">
+        <input type="text" id="chatInput" placeholder="Ask fertilizer question...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+
+    <!-- JS Scripts -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+</html>
